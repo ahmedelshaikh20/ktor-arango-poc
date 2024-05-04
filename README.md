@@ -197,7 +197,7 @@ Run the application file and now the server is listening on port 8080
     "message": "Success"
 }
 ```
-5-Post Request to Delete Hospita;
+5-Post Request to Delete Hospital
 
     -Request Endpoint: /hospital/deleteHospital/{id}.
     -HTTP Verb:GET.
