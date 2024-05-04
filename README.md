@@ -52,7 +52,7 @@ Run the application file and now the server is listening on port 8080
 }
 ```
 
-3-Post Request to Register Hospital to User
+3-Post Request to Register Hospital to Patient
     
     -Request Endpoint: /patient/registerHospital.
     -HTTP Verb:POST.
@@ -62,12 +62,8 @@ Run the application file and now the server is listening on port 8080
 
 ```json
 {
-    "patientId":"33846",
-    "hospital" : {
-    "id":"33821",
-    "name" : "El Gawy",
-    "type":"private",
-    "address":"newCairo"}
+    "patientId":"53287",
+    "hospitalId":"33821"
 }
 ```
 - **Response Body:**
@@ -84,6 +80,10 @@ Run the application file and now the server is listening on port 8080
     "message": "Success"
 }
 ```
+- **Relation Visualization:**
+![Relation](imgs/Relation.png)
+
+
 4-Get request to get all hospitals registered by specific user.
 
     -Request Endpoint: /patient/allHospitals/{id}.
