@@ -9,14 +9,10 @@ import kotlinx.serialization.json.JsonNames
 
 @Serializable
 data class PatientHospitalRelation(
-  var registeredHospital: List<Hospital>? = emptyList()
+  var nodeId: String?,
+  val target: String?
 ) : Edge()
 
-
-@Serializable
-data class HospitalPatientRelation(
-  val registeredPatients: List<Patient> = emptyList()
-) : Edge()
 
 @Serializable
 open class Edge : Model() {

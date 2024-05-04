@@ -47,7 +47,7 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       }
       post("/deleteHospital/{id}") {
         try {
-          val id =   call.parameters["id"].toString()
+          val id = call.parameters["id"].toString()
           println(id)
           hospitalService.deleteHospital((id))
           call.respond(HttpStatusCode.OK, message = "Success")
@@ -57,7 +57,7 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       }
       get("/allPatients/{id}") {
         try {
-          val id = "hospital/" + call.parameters["id"]
+          val id =  call.parameters["id"]
           println(id)
           if (id != null) {
             val hospitals = hospitalService.getAllHospitalPatient(id)
@@ -107,7 +107,7 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       }
       get("/allHospitals/{id}") {
         try {
-          val id = "patient/" + call.parameters["id"]
+          val id =  call.parameters["id"]
           println(id)
           if (id != null) {
             val hospitals = patientService.getAllRegisteredHospitals(id)

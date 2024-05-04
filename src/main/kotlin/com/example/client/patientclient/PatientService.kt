@@ -3,13 +3,14 @@ package com.example.client.patientclient
 import com.example.data.model.Hospital
 import com.example.data.model.Patient
 import com.example.data.register.HospitalRegistrationBody
+import com.example.utils.BaseResponse
 
 interface PatientService {
-  suspend fun getAllPatients(): List<Patient>
-  suspend fun addPatient(patient: Patient)
-  suspend fun deletePatient(patientID:String)
-  suspend fun modifyPatient(patient: Patient)
-  suspend fun registerHospital(hospitalRegistrationBody: HospitalRegistrationBody)
-  suspend fun getAllRegisteredHospitals(patientId: String): List<Hospital>
+  suspend fun getAllPatients(): BaseResponse<Any>
+  suspend fun addPatient(patient: Patient): BaseResponse<Any>
+  suspend fun deletePatient(patientID: String): BaseResponse<Any>
+  suspend fun modifyPatient(patient: Patient): BaseResponse<Any>
+  suspend fun registerHospital(hospitalRegistrationBody: HospitalRegistrationBody): BaseResponse<Any>
+  suspend fun getAllRegisteredHospitals(patientId: String): BaseResponse<Any>
 
 }
