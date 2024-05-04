@@ -58,7 +58,7 @@ class HospitalServiceImpl(val arangoDB: Db) : HospitalService {
     }
     println(patients.toString())
 
-    return BaseResponse.SuccessResponse(data = patients.toString(), message = "Success")
+    return BaseResponse.SuccessResponse(data = patients, message = "Success")
   }
 
 }

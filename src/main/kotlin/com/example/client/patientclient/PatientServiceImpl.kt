@@ -53,7 +53,7 @@ class PatientServiceImpl(val arangoDB: Db) : PatientService {
         to = "${Hospital::class.simpleName?.lowercase(Locale.getDefault())}/${hospital?.id}"
       }
       arangoDB.insert(patientHospitalRelation)
-      return BaseResponse.SuccessResponse(message = "Success")
+      return BaseResponse.SuccessResponse(data = patientHospitalRelation,message = "Success")
     }
     return BaseResponse.ErrorResponse(message = "One of the fields are null")
 
@@ -77,7 +77,7 @@ class PatientServiceImpl(val arangoDB: Db) : PatientService {
     }
     println(hospitals.toString())
 
-    return BaseResponse.SuccessResponse(data = hospitals.toString(), message = "Success")
+    return BaseResponse.SuccessResponse(data = hospitals, message = "Success")
   }
 
 }

@@ -28,8 +28,8 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       post("/createHospital") {
         try {
           val hospital = call.receive<Hospital>()
-          hospitalService.createHospital(hospital)
-          call.respond(HttpStatusCode.OK, message = "Success")
+          val response = hospitalService.createHospital(hospital)
+          call.respond(response)
 
         } catch (e: Exception) {
           call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
@@ -38,8 +38,8 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       post("/modifyHospital") {
         try {
           val hospital = call.receive<Hospital>()
-          hospitalService.modifyHospital((hospital))
-          call.respond(HttpStatusCode.OK, message = "Success")
+          val response = hospitalService.modifyHospital((hospital))
+          call.respond(response)
 
         } catch (e: Exception) {
           call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
@@ -57,7 +57,7 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       }
       get("/allPatients/{id}") {
         try {
-          val id =  call.parameters["id"]
+          val id = call.parameters["id"]
           println(id)
           if (id != null) {
             val hospitals = hospitalService.getAllHospitalPatient(id)
@@ -92,7 +92,8 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       post("/modifyPatient") {
         try {
           val patient = call.receive<Patient>()
-          patientService.modifyPatient((patient))
+          val response = patientService.modifyPatient((patient))
+          call.respond(response)
         } catch (e: Exception) {
           call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
         }
@@ -100,14 +101,16 @@ fun Application.configureRouting(hospitalService: HospitalService, patientServic
       post("/registerHospital") {
         try {
           val body = call.receive<HospitalRegistrationBody>()
-          patientService.registerHospital((body))
+          val response = patientService.registerHospital((body))
+          call.respond(response)
+
         } catch (e: Exception) {
           call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
         }
       }
       get("/allHospitals/{id}") {
         try {
-          val id =  call.parameters["id"]
+          val id = call.parameters["id"]
           println(id)
           if (id != null) {
             val hospitals = patientService.getAllRegisteredHospitals(id)

@@ -12,7 +12,6 @@ import com.arangodb.model.DocumentUpdateOptions
 import com.arangodb.serde.jackson.JacksonSerde
 import com.example.data.model.Model
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import kotlinx.datetime.Clock
 import kotlin.reflect.KClass
 
 class Db(user: String, database: String) {
@@ -58,16 +57,14 @@ class Db(user: String, database: String) {
 
   fun <T : Model> insert(model: T) = synchronized(db) {
     db.collection(model::class.collection).insertDocument(
-      model.apply { created = Clock.System.now() },
+      model,
       DocumentCreateOptions().returnNew(true)
     )!!.new!!
   }
 
   fun <T : Model> update(model: T) = synchronized(db) {
     db.collection(model::class.collection)
-      .updateDocument(model.id?.asKey(), model.apply {
-        updated = Clock.System.now()
-      }, DocumentUpdateOptions().returnNew(true))!!.new!!
+      .updateDocument(model.id?.asKey(), model, DocumentUpdateOptions().returnNew(true))!!.new!!
   }
 
   fun <T : Model> delete(model: T) =
