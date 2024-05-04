@@ -29,9 +29,9 @@ Request Body Exmaple for Patient
     -HTTP Verb:GET.
     -Response Content-Type: application/json.
 
+-Response Body Exmaple for all Patients
 ```json
 
-Response Body Exmaple for all Patients
 {
     "data": [
         {
