@@ -15,12 +15,13 @@ Run the application file and now the server is listening on port 8080
     -HTTP Verb:POST.
     -Request Content-Type: application/json.
 
+- **Request body for Patient:**
+
 ```json
 
-Request Body Exmaple for Patient
 {
     "name" : "ahmed",
-    "gender":"Non Binary"
+    "gender":"Male"
 }
 ```
 2-Get request to get all Patients.
@@ -29,7 +30,7 @@ Request Body Exmaple for Patient
     -HTTP Verb:GET.
     -Response Content-Type: application/json.
 
--Response Body Exmaple for all Patients
+- **Response Body Exmaple for all Patients:**
 ```json
 
 {
