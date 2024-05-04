@@ -62,12 +62,8 @@ Run the application file and now the server is listening on port 8080
 
 ```json
 {
-    "patientId":"33846",
-    "hospital" : {
-    "id":"33821",
-    "name" : "El Gawy",
-    "type":"private",
-    "address":"newCairo"}
+    "patientId":"53287",
+    "hospitalId":"33821"
 }
 ```
 - **Response Body:**
