@@ -43,19 +43,38 @@ class PatientServiceImpl(val arangoDB: Db) : PatientService {
       Patient::class,
       query = "FOR p IN patient FILTER p._key LIKE ${hospitalRegistrationBody.patientId} RETURN p"
     )
+    if (patient == null) {
+      return BaseResponse.ErrorResponse(message = "Invalid Patient Id")
+    }
     val hospital = arangoDB.one(
       Hospital::class,
-      query = "FOR p IN hospital FILTER p._key LIKE ${hospitalRegistrationBody.hospital.id} RETURN p"
+      query = "FOR p IN hospital FILTER p._key LIKE ${hospitalRegistrationBody.hospitalId} RETURN p"
     )
+    if (hospital == null) {
+      return BaseResponse.ErrorResponse(message = "Invalid Hospital Id")
+    }
+   if ( checkIfHospitalAlreadyRegistered(patient, hospital)){
+     return BaseResponse.ErrorResponse(message = "Hospital Already Registered")}
+
     if (hospital != null && patient != null) {
       val patientHospitalRelation = PatientHospitalRelation(nodeId = patient.id, target = hospital.id).apply {
         from = "${Patient::class.simpleName?.lowercase(Locale.getDefault())}/${patient?.id}"
         to = "${Hospital::class.simpleName?.lowercase(Locale.getDefault())}/${hospital?.id}"
       }
       arangoDB.insert(patientHospitalRelation)
-      return BaseResponse.SuccessResponse(data = patientHospitalRelation,message = "Success")
+      return BaseResponse.SuccessResponse(data = patientHospitalRelation, message = "Success")
     }
     return BaseResponse.ErrorResponse(message = "One of the fields are null")
+
+  }
+
+  private fun checkIfHospitalAlreadyRegistered(patient: Patient, hospital: Hospital):Boolean {
+    val res =arangoDB.one(
+      PatientHospitalRelation::class,
+      query = "FOR p IN patienthospitalrelation FILTER p.nodeId LIKE ${patient.id} && p.target LIKE ${hospital.id} RETURN p"
+    )
+
+    return res!=null
 
   }
 
