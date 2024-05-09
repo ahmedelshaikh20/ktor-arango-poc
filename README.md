@@ -1,19 +1,20 @@
-# Coding Task for Ritec
+# KTOR with Arangodb Simple Assigment
 
-Coding Assigment was about creating hospital system with ktor and Arangodb 
+Coding Assignment was about creating a hospital system with Ktor and Arangodb 
 All relations between entities should be using graphs only
 
 ## Setup
+1-Setup your arangodb with docker(if you are using Macos) then run the container and now the DB will have default port 8529.
 
-Run the application file and now the server is listening on port 8080
+2-Run the application file and now the server is listening on port 8080.
 
 ## Api EndPoints For Patients 
 
-1-Post a request to add NEW Patient.
+1-Post a request to add a NEW Patient.
 
     -Request Endpoint: patient/addPatient.
-    -HTTP Verb:POST.
-    -Request Content-Type: application/json.
+    -HTTP Verb: POST.
+    -Request Content-Type: application/JSON.
 
 - **Request body for Patient:**
 
